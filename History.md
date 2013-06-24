@@ -1,4 +1,29 @@
 
+0.6.1 / 2013-04-13 
+==================
+
+  * fix Socket#close() callback support
+  * add callback to reply() when peer is gone
+
+0.6.0 / 2013-04-13 
+==================
+
+  * add optional reply() callback. Closes #95
+  * add support for optional req.send() callback. Closes #89
+
+0.5.2 / 2013-04-09 
+==================
+
+  * add `sock.queue` array for logging / debugging etc
+  * fix connection queue flush which may drop messages on connection
+
+0.5.1 / 2013-03-01
+==================
+
+  * add exit() to HWM example
+  * add better HWM example
+  * fix: ignore closed sockets on reply(). fixes #82
+
 0.5.0 / 2013-01-01
 ==================
 
