@@ -2,6 +2,8 @@
 
   Axon is a message-oriented socket library for node.js heavily inspired by zeromq.
 
+[![Build Status](https://travis-ci.org/visionmedia/axon.png)](https://travis-ci.org/visionmedia/axon)
+
 ## Installation
 
     $ npm install axon
@@ -289,6 +291,28 @@ __Note:__ codecs must be defined on both the sending and receiving ends, otherwi
 axon cannot properly decode the messages. You may of course ignore this
 feature all together and simply pass encoded data to `.send()`.
 
+To use a codec in a socket pair, use the `format(<codec name>)` command. For example, to send json over a req/rep socket pair:
+
+```
+var axon = require('axon')
+  , req = axon.socket('req')
+  , rep = axon.socket('rep')
+
+req.format('json');
+req.bind(3000);
+
+rep.format('json');
+rep.connect(3000);
+
+rep.on('message', function(obj, reply){
+  reply(obj);
+});
+
+req.send({ hello: 'World' }, function(res){
+  console.log(res);
+});
+```
+
 ## Performance
 
 Preliminary benchmarks on my Macbook Pro based on 10 messages
@@ -367,8 +391,8 @@ $ make test
 
   - [Screencast](https://vimeo.com/45818408)
   - [Axon RPC](https://github.com/visionmedia/axon-rpc)
+  - [msgpack codec](https://github.com/visionmedia/axon-msgpack)
 
 ## License
 
   MIT
-
