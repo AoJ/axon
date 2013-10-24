@@ -1,6 +1,7 @@
 # Axon
 
-  Axon is a message-oriented socket library for node.js heavily inspired by zeromq.
+  Axon is a message-oriented socket library for node.js heavily inspired by zeromq. For a light-weight
+  UDP alternative you may be interested in [punt](https://github.com/visionmedia/punt).
 
 [![Build Status](https://travis-ci.org/visionmedia/axon.png)](https://travis-ci.org/visionmedia/axon)
 
@@ -15,12 +16,13 @@
   - light-weight wire protocol
   - supports arbitrary binary message (msgpack, json, BLOBS, etc)
   - supports JSON messages out of the box
+  - unix domain socket support
   - fast (~800 mb/s ~500,000 messages/s)
 
 ## Events
 
   - `close` when server or connection is closed
-  - `error` (err) when an-handled socket error occurs
+  - `error` (err) when an un-handled socket error occurs
   - `ignored error` (err) when an axon-handled socket error occurs, but is ignored
   - `socket error` (err) emitted regardless of handling, for logging purposes
   - `reconnect attempt` when a reconnection attempt is made
@@ -252,6 +254,13 @@ sock.bind('tcp://0.0.0.0:3000')
 sock.connect(3000)
 sock.connect(3000, '0.0.0.0')
 sock.connect('tcp://0.0.0.0:3000')
+```
+
+  You may also use unix domain sockets:
+
+```
+sock.bind('unix:///some/path')
+sock.connect('unix:///some/path')
 ```
 
 ## Protocol
